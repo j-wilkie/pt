@@ -1,0 +1,4 @@
+hidapi==0.7.99.post21
+PySide2==5.13.0
+shiboken2==5.13.0
+streamdeck==0.3.2

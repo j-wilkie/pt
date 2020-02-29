@@ -1,0 +1,31 @@
+class ProjectManager:
+    def __init__(self, num_of_buttons):
+        self.project_time_stamps = defaultdict(list)
+        self.project_names = defaultdict(str)
+        for i in range(1, num_of_buttons + 1):
+            self.project_names[i] = "Project {}".format(i)
+        self.selected_proj = ""
+
+    def key_press(self, key):
+        print(key)
+        proj_id = self.project_names[int(key)]
+        if(proj_id != self.selected_proj): # If project currently selected don't both adding another time stamp
+            self.selected_proj = proj_id
+            self.project_time_stamps[proj_id].append(time.ctime(time.time())) # time.ctime(time.time()) gives local time stamp
+    
+    def save_task_durations(self):
+        print(self.project_time_stamps)
+        with open('project_time_stamps.csv', 'w') as f:
+            for key in self.project_time_stamps.keys():
+                f.write("{}, ".format(key))
+                for duration in self.project_time_stamps[key]:
+                    f.write("{},".format(duration))
+                f.write('\n')
+
+    def set_project_name(self, index, name):
+        self.project_names[index] = name
+
+    def get_project_name(self, index):
+        return self.project_names[index]
+
+class Project
